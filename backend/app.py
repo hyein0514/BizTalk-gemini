@@ -19,6 +19,10 @@ except Exception as e:
     # 환경 변수가 설정되지 않았을 경우를 대비한 예외 처리
     print(f"Groq 클라이언트 초기화 오류: {e}")
     client = None
+    
+@app.route('/', methods=['GET'])
+def index():
+    return "BizTone Converter 백엔드 서버가 실행 중입니다.", 200
 
 @app.route('/health', methods=['GET'])
 def health_check():
