@@ -4,45 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BizTone Converter</title>
-    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <header>
-        <h1>BizTone Converter</h1>
-        <p>업무용 말투로 손쉽게 변환해 보세요.</p>
-    </header>
-    <main>
-        <div class="converter-container">
-            <section class="input-section">
-                <h2>원본 텍스트 입력</h2>
-                <textarea id="originalText" placeholder="여기에 변환할 텍스트를 입력하세요." maxlength="500"></textarea>
-                <div class="char-count">
-                    <span id="currentCharCount">0</span> / 500
+<body class="bg-gray-100 font-sans leading-normal text-gray-800">
+    <div class="container mx-auto p-4">
+        <header class="text-center py-8">
+            <h1 class="text-4xl font-bold text-blue-600">BizTone Converter</h1>
+            <p class="text-lg text-gray-600 mt-2">업무용 말투로 손쉽게 변환해 보세요.</p>
+        </header>
+        <main class="mt-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-semibold mb-4">원본 텍스트 입력</h2>
+                    <textarea id="originalText" class="w-full h-48 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="여기에 변환할 텍스트를 입력하세요." maxlength="500"></textarea>
+                    <div class="text-right text-gray-500 mt-2">
+                        <span id="currentCharCount">0</span> / 500
+                    </div>
                 </div>
-            </section>
 
-            <section class="output-section">
-                <h2>변환 설정 및 결과</h2>
-                <div class="target-selection">
-                    <label for="targetAudience">변환 대상:</label>
-                    <select id="targetAudience">
-                        <option value="상사">상사 (Upward)</option>
-                        <option value="타팀 동료">타팀 동료 (Lateral)</option>
-                        <option value="고객">고객 (External)</option>
-                    </select>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-semibold mb-4">변환 설정 및 결과</h2>
+                    <div class="flex items-center mb-4">
+                        <label for="targetAudience" class="text-lg mr-4">변환 대상:</label>
+                        <select id="targetAudience" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="상사">상사 (Upward)</option>
+                            <option value="타팀 동료">타팀 동료 (Lateral)</option>
+                            <option value="고객">고객 (External)</option>
+                        </select>
+                    </div>
+                    <button id="convertBtn" class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-md hover:bg-blue-700 transition duration-300">변환하기</button>
+                    <div class="mt-4">
+                        <textarea id="convertedText" class="w-full h-48 p-3 border border-gray-300 rounded-md bg-gray-50" placeholder="변환된 텍스트가 여기에 표시됩니다." readonly></textarea>
+                        <button id="copyBtn" class="w-full mt-2 bg-gray-500 text-white font-bold py-2 px-4 rounded-md hover:bg-gray-600 transition duration-300">복사하기</button>
+                    </div>
+                    <div id="feedbackArea" class="mt-4"></div>
                 </div>
-                <button id="convertBtn" class="primary-btn">변환하기</button>
-                <div class="converted-result-area">
-                    <textarea id="convertedText" placeholder="변환된 텍스트가 여기에 표시됩니다." readonly></textarea>
-                    <button id="copyBtn" class="secondary-btn">복사하기</button>
-                </div>
-                <div id="feedbackArea" class="feedback-area"></div>
-            </section>
-        </div>
-    </main>
-    <footer>
-        <p>&copy; 2026 BizTone Converter. All rights reserved.</p>
-    </footer>
+            </div>
+        </main>
+        <footer class="text-center text-gray-500 mt-12 py-4">
+            <p>&copy; 2026 BizTone Converter. All rights reserved.</p>
+        </footer>
+    </div>
     <script src="js/script.js"></script>
 </body>
 </html>

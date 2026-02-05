@@ -13,14 +13,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Utility Functions ---
     function showFeedback(message, type) {
         feedbackArea.textContent = message;
-        feedbackArea.className = `feedback-area ${type}`; // Add type class for styling
+        if (type === 'success') {
+            feedbackArea.className = 'p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg';
+        } else if (type === 'error') {
+            feedbackArea.className = 'p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg';
+        }
         feedbackArea.style.display = 'block';
 
         // Hide feedback after 3 seconds
         setTimeout(() => {
             feedbackArea.style.display = 'none';
             feedbackArea.textContent = '';
-            feedbackArea.className = 'feedback-area';
+            feedbackArea.className = '';
         }, 3000);
     }
 
