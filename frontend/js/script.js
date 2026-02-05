@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const feedbackArea = document.getElementById('feedbackArea');
 
     const MAX_CHAR_COUNT = 500;
-    const BACKEND_API_URL = 'http://127.0.0.1:5000/api/convert'; // Flask backend URL
+    const BACKEND_API_URL = '/api/convert'; // Flask backend URL
 
     // --- Utility Functions ---
     function showFeedback(message, type) {
