@@ -52,11 +52,38 @@ def convert_text():
     original_text = data.get('text')
     target = data.get('target')
 
-    # 더미 응답 (Sprint 1 목표)
-    # 실제 Groq API 호출 로직은 Sprint 3에서 구현 예정
-    dummy_response = f"'{original_text}'를 '{target}' 대상으로 변환한 결과입니다."
+    # 대상별 프롬프트 엔지니어링
+    prompts = {
+        "상사": "다음 내용을 상사에게 보고하는 정중한 격식체 문장으로 변환해 주세요. 결론부터 명확하게 제시하고, 신뢰성을 강조하며 전문적인 비즈니스 언어를 사용해 주세요. 원문: ",
+        "타팀 동료": "다음 내용을 타팀 동료에게 협조를 요청하는 친절하고 상호 존중하는 어투의 문장으로 변환해 주세요. 요청 사항과 마감 기한을 명확하게 전달하며 협업의 원활함을 강조해 주세요. 원문: ",
+        "고객": "다음 내용을 고객에게 안내하거나 응대하는 극존칭을 사용하는 전문적이고 신뢰감 있는 문장으로 변환해 주세요. 고객 서비스 마인드를 강조하고 안내, 공지, 사과 등의 목적에 부합하게 작성해 주세요. 원문: "
+    }
 
-    return jsonify({"converted_text": dummy_response})
+    system_message = prompts.get(target, "다음 내용을 비즈니스 업무 말투로 변환해 주세요. 원문: ")
+    user_message = original_text
+
+    try:
+        chat_completion = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "system",
+                    "content": system_message,
+                },
+                {
+                    "role": "user",
+                    "content": user_message,
+                }
+            ],
+            model="moonshotai/kimi-k2-instruct-0905",
+            temperature=0.7, # 창의성 조절
+            max_tokens=500, # 최대 응답 토큰
+        )
+        converted_text = chat_completion.choices[0].message.content
+        return jsonify({"converted_text": converted_text})
+
+    except Exception as e:
+        print(f"Groq API 호출 중 오류 발생: {e}")
+        return jsonify({"error": "텍스트 변환 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요."}), 500
 
 if __name__ == '__main__':
     # Vercel 환경에서는 이 부분이 실행되지 않음
