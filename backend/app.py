@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template, send_from_directory
 from flask_cors import CORS
 from groq import Groq
 from dotenv import load_dotenv
@@ -7,7 +7,8 @@ from dotenv import load_dotenv
 # .env 파일에서 환경 변수 로드
 load_dotenv()
 
-app = Flask(__name__)
+# Flask 앱 초기화. frontend 디렉토리를 static 및 template 폴더로 지정합니다.
+app = Flask(__name__, static_folder='../frontend', template_folder='../frontend')
 # 모든 도메인에서 오는 요청을 허용하도록 CORS 설정
 CORS(app)
 
@@ -19,10 +20,18 @@ except Exception as e:
     # 환경 변수가 설정되지 않았을 경우를 대비한 예외 처리
     print(f"Groq 클라이언트 초기화 오류: {e}")
     client = None
-    
-@app.route('/', methods=['GET'])
-def index():
-    return "BizTone Converter 백엔드 서버가 실행 중입니다.", 200
+
+@app.route('/')
+def serve_index():
+    return render_template('index.html')
+
+@app.route('/css/<path:filename>')
+def serve_css(filename):
+    return send_from_directory('../frontend/css', filename)
+
+@app.route('/js/<path:filename>')
+def serve_js(filename):
+    return send_from_directory('../frontend/js', filename)
 
 @app.route('/health', methods=['GET'])
 def health_check():

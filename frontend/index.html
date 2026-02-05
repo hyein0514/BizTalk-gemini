@@ -12,9 +12,37 @@
         <p>업무용 말투로 손쉽게 변환해 보세요.</p>
     </header>
     <main>
-        <!-- UI 컴포넌트는 2단계에서 구현 예정 -->
-        <p>UI 구현 예정...</p>
+        <div class="converter-container">
+            <section class="input-section">
+                <h2>원본 텍스트 입력</h2>
+                <textarea id="originalText" placeholder="여기에 변환할 텍스트를 입력하세요." maxlength="500"></textarea>
+                <div class="char-count">
+                    <span id="currentCharCount">0</span> / 500
+                </div>
+            </section>
+
+            <section class="output-section">
+                <h2>변환 설정 및 결과</h2>
+                <div class="target-selection">
+                    <label for="targetAudience">변환 대상:</label>
+                    <select id="targetAudience">
+                        <option value="상사">상사 (Upward)</option>
+                        <option value="타팀 동료">타팀 동료 (Lateral)</option>
+                        <option value="고객">고객 (External)</option>
+                    </select>
+                </div>
+                <button id="convertBtn" class="primary-btn">변환하기</button>
+                <div class="converted-result-area">
+                    <textarea id="convertedText" placeholder="변환된 텍스트가 여기에 표시됩니다." readonly></textarea>
+                    <button id="copyBtn" class="secondary-btn">복사하기</button>
+                </div>
+                <div id="feedbackArea" class="feedback-area"></div>
+            </section>
+        </div>
     </main>
+    <footer>
+        <p>&copy; 2026 BizTone Converter. All rights reserved.</p>
+    </footer>
     <script src="js/script.js"></script>
 </body>
 </html>

@@ -1,1 +1,263 @@
-/* Sprint 2에서 스타일 구현 예정 */
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+    line-height: 1.6;
+    color: #333333;
+    background-color: #F5F7FA; /* Secondary Color */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+header h1 {
+    font-size: 28px;
+    color: #4A90E2; /* Primary Color */
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 16px;
+    color: #555555;
+}
+
+main {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-bottom: 40px; /* Space for footer */
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #888888;
+    font-size: 14px;
+    border-top: 1px solid #E0E6ED;
+    margin-top: auto; /* Push footer to the bottom */
+}
+
+/* Converter Container Layout */
+.converter-container {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.input-section,
+.output-section {
+    flex: 1;
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Card shadow */
+    display: flex;
+    flex-direction: column;
+}
+
+h2 {
+    font-size: 22px;
+    color: #333333;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #E0E6ED;
+    padding-bottom: 10px;
+}
+
+/* Textarea Styling */
+textarea {
+    width: 100%;
+    min-height: 200px;
+    padding: 12px;
+    border: 1px solid #E0E6ED; /* Border Color */
+    border-radius: 4px;
+    font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+    font-size: 16px;
+    resize: vertical;
+    margin-bottom: 10px;
+    transition: border-color 0.3s ease;
+}
+
+textarea:focus {
+    border-color: #4A90E2; /* Primary Color on focus */
+    outline: none;
+}
+
+/* Character Count */
+.char-count {
+    text-align: right;
+    font-size: 14px;
+    color: #888888;
+    margin-bottom: 20px;
+}
+
+/* Target Selection */
+.target-selection {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.target-selection label {
+    font-size: 16px;
+    color: #333333;
+}
+
+.target-selection select {
+    padding: 8px 12px;
+    border: 1px solid #E0E6ED;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #ffffff;
+    cursor: pointer;
+    appearance: none; /* Remove default select arrow */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%234A90E2%22%20d%3D%22M287%20165.7c-4.3%204.3-11.2%204.3-15.5%200L146.2%2040.8%2020.9%20165.7c-4.3%204.3-11.2%204.3-15.5%200s-4.3-11.2%200-15.5L138.6%2015.1c4.3-4.3%2011.2-4.3%2015.5%200l120.9%20120.9c4.4%204.3%204.4%2011.3%200%2015.6z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 8px top 50%;
+    background-size: 12px auto;
+}
+
+.target-selection select:focus {
+    border-color: #4A90E2;
+    outline: none;
+}
+
+
+/* Buttons */
+.primary-btn,
+.secondary-btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, filter 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 15px;
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.primary-btn {
+    background-color: #4A90E2; /* Primary Color */
+    color: #FFFFFF;
+}
+
+.primary-btn:hover {
+    filter: brightness(110%); /* 10% brighter on hover */
+}
+
+.secondary-btn {
+    background-color: #6c757d; /* A neutral gray for secondary action */
+    color: #FFFFFF;
+}
+
+.secondary-btn:hover {
+    filter: brightness(110%);
+}
+
+/* Converted Result Area */
+.converted-result-area {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allow textarea to take available space */
+}
+
+.converted-result-area textarea {
+    flex-grow: 1; /* Make converted textarea fill space */
+    margin-bottom: 15px; /* Space between textarea and copy button */
+}
+
+.converted-result-area .secondary-btn {
+    align-self: flex-end; /* Align copy button to bottom right */
+    margin-top: auto; /* Push button to bottom */
+}
+
+
+/* Feedback Area */
+.feedback-area {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    text-align: center;
+    display: none; /* Hidden by default, shown by JS */
+}
+
+.feedback-area.success {
+    background-color: #e6ffed; /* Light green */
+    color: #28a745; /* Dark green */
+    border: 1px solid #50E3C2; /* Success Color */
+}
+
+.feedback-area.error {
+    background-color: #ffe6e6; /* Light red */
+    color: #dc3545; /* Dark red */
+    border: 1px solid #D0021B; /* Error Color */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .converter-container {
+        flex-direction: column; /* Stack sections vertically */
+    }
+
+    .input-section,
+    .output-section {
+        flex: none; /* Remove flex sizing */
+        width: 100%; /* Full width */
+    }
+
+    header {
+        margin-bottom: 20px;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 15px;
+    }
+
+    header h1 {
+        font-size: 22px;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+        width: 100%;
+        padding: 10px;
+    }
+}
